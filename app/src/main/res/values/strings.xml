@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">CifraCherry</string>
+    <string name="email">Email</string>
+    <string name="Password">Senha</string>
+    <string name="lets_go">Vamos lá</string>
+    <string name="not_registered">Ainda não sou cadastrado</string>
+    <string name="ready">Pronto!</string>
+    <string name="text_register_email"><b>Não tem uma conta certo? <br /></b><br>Vamos ao cadastro que é bem simples,</br><br>preencha com um email para o acesso.</br> </string>
+    <string name="text_register_password"><b>Agora é só escolher uma senha!</b></string>
+    <string name="password_confirm">Confirmação da senha</string>
+    <string name="text_register_registerconfirm">
+        <b>Excelente!  <br />
+        <br /> Seu cadastro foi realizado com sucesso!</b> <br />
+        Agora ja pode criar seus repertórios personalizados,
+        ter acesso fácil as cifras e compartilhar com seus amigos
+        e toda comunidade de músicos!</string>
+    <string name="start_journey">Começar jornada!</string>
+    <string name="user_name">Nome do Usuário</string>
+    <string name="user_bios">Uma breve descrição sobre você, era uma vez uma cegonha amiga de um pato que vivia em uberlandia perto de maria que é irmã de bonifácil</string>
+    <string name="specialty">instrumento</string>
+</resources>
