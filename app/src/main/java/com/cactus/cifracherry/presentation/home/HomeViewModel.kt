@@ -1,38 +1,63 @@
 package com.cactus.cifracherry.presentation.home
 
-import androidx.lifecycle.MutableLiveData
+import android.view.View
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.cactus.cifracherry.data.MusiciansResult
+import com.cactus.cifracherry.data.OperationResult
+import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.data.model.Musician
 import com.cactus.cifracherry.data.repository.HomeRepository
 import java.lang.IllegalArgumentException
 
 class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
 
-    var callAdapterListCard: ((List<Musician>)->Unit)? = null
+    var callSetupCardAdapter: ((List<Musician>)->Unit)? = null
+    var callSetupAlbumAdapter: ((List<Album>)->Unit)? = null
 //    val listMusiLiveData: MutableLiveData<List<Musician>> = MutableLiveData()
     private var listMusician: List<Musician> = listOf()
+    private var listAlbums: List<Album> = listOf()
+
+    companion object{
+        @BindingAdapter("requestFocus")
+        @JvmStatic fun View.requestFocus(requestFocus: Boolean){
+                this.isFocusableInTouchMode = requestFocus
+        }
+    }
 
     fun setup() {
         taskLoadCards()
+        taskLoadAlbums()
     }
-
 
     private fun taskLoadCards() {
         getMusicians()
-        callAdapterListCard?.invoke(listMusician)
+        callSetupCardAdapter?.invoke(listMusician)
+    }
 
+    private fun taskLoadAlbums() {
+        getAlbums()
+        callSetupAlbumAdapter?.invoke(listAlbums)
     }
 
     fun getMusicians() {
-        dataSource.getMusicians { result: MusiciansResult ->
+        dataSource.getMusicians { result: OperationResult ->
             when(result) {
-                is MusiciansResult.Success -> {
-                    listMusician = result.musicians
+                is OperationResult.Success<*> -> {
+                    listMusician = result.list as List<Musician>
                 }
-                is MusiciansResult.Error -> { }
+                is OperationResult.Error -> { }
+            }
+        }
+    }
 
+    fun getAlbums() {
+        dataSource.getAlbums { result: OperationResult ->
+            when(result) {
+                is OperationResult.Success<*> -> {
+                    listAlbums = result.list as List<Album>
+                }
+                is OperationResult.Error -> { }
             }
         }
     }
@@ -46,7 +71,7 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
         }
     }
 
-
     fun onClickMark(user: Musician?) {}
     fun onClickDelete(user: Musician?) {}
+    fun onClickAlbum(album: Album?) {}
 }

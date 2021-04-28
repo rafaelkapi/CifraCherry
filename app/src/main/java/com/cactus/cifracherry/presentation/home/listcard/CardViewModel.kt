@@ -1,17 +1,15 @@
 package com.cactus.cifracherry.presentation.home.listcard
 
-import androidx.databinding.BindingAdapter
+import com.cactus.cifracherry.common.FunClickMusician
 import com.cactus.cifracherry.data.model.Musician
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 
-class CardVielModel {
+class CardViewModel {
 
     //dependencies
     var user: Musician? = null
     var marked = true
-    var onClickButtonMark: ((Musician?) -> Unit)? = null
-    var onClickButtonDelete: ((Musician?) -> Unit)? = null
+    var onClickButtonMark: FunClickMusician? = null
+    var onClickButtonDelete: FunClickMusician? = null
 
     fun onClickMark() {
         onClickButtonMark?.invoke(user)
@@ -27,9 +25,29 @@ class CardVielModel {
 
     fun getSpecialty() = user?.specialty ?: ""
 
-    fun getDescription() = user?.description ?: ""
 
     fun getUrlphoto() = user?.url ?: ""
+
+    fun showLogo() : Boolean? {
+        if (user?.displayControlCard != null) {
+          return user?.displayControlCard?.showLogo
+        }
+        return false
+    }
+
+    fun showMusicianCard() : Boolean? {
+        if (user?.displayControlCard != null) {
+            return user?.displayControlCard?.showMusicianCard
+        }
+        return true
+    }
+
+    fun showAddCard() : Boolean? {
+        if (user?.displayControlCard != null) {
+            return user?.displayControlCard?.showAddCard
+        }
+        return false
+    }
 
 
     fun showMark() {

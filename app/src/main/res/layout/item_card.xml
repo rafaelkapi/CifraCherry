@@ -1,118 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
-            type="com.cactus.cifracherry.presentation.home.listcard.CardVielModel" />
-        
+            type="com.cactus.cifracherry.presentation.home.listcard.CardViewModel" />
+
     </data>
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_margin="4dp"
-    android:layout_height="190dp"
-    app:cardBackgroundColor="@color/colorSec"
-    app:cardCornerRadius="18dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_photo"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_profile_thin"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="1dp"
-            app:civ_circle_background_color="@color/accentColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="150dp">
 
 
-        <TextView
-            android:id="@+id/user_name"
-            android:text="@{viewmodel.name}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/accentColor"
-            android:layout_marginStart="16dp"
-            app:layout_constraintVertical_bias="0.2"
-            app:layout_constraintStart_toEndOf="@id/iv_photo"
-            app:layout_constraintTop_toTopOf="@id/iv_photo"
-            app:layout_constraintBottom_toBottomOf="@id/iv_photo"
-            tools:text="@string/user_name"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="240dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:visibility="@{viewmodel.showLogo ? View.GONE :  View.VISIBLE}"
+            tools:visibility="visible"
+            app:cardBackgroundColor="@color/colorSec"
+            app:cardCornerRadius="18dp">
 
-        <TextView
-            android:text="@{viewmodel.specialty}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/accentColor"
-            android:layout_marginStart="16dp"
-            app:layout_constraintVertical_bias="0.8"
-            app:layout_constraintStart_toEndOf="@id/iv_photo"
-            app:layout_constraintTop_toTopOf="@id/iv_photo"
-            app:layout_constraintBottom_toBottomOf="@id/iv_photo"
-            tools:text="@string/specialty"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewmodel.showMusicianCard ? View.VISIBLE : View.GONE }">
 
-        <TextView
-            android:text="@{viewmodel.description}"
-            android:id="@+id/user_description"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/accentColor"
-            android:maxHeight="40dp"
-            android:textAlignment="center"
-            android:maxLines="2"
-            android:ellipsize="end"
-            app:layout_constraintVertical_bias="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_photo"
-            tools:text="@string/user_bios"
-            />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_profile_thin"
+                    app:civ_border_color="@color/white"
+                    app:civ_circle_background_color="@color/accentColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:onClick="@{()->viewmodel.onClickMark()}"
-            android:src="@{viewmodel.marked ? @drawable/ic_mark_selected : @drawable/ic_mark_noselected }"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintTop_toBottomOf="@id/user_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/ic_mark_selected"
-            />
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{viewmodel.name}"
+                    android:textColor="@color/accentColor"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_photo"
+                    app:layout_constraintStart_toEndOf="@id/iv_photo"
+                    app:layout_constraintTop_toTopOf="@id/iv_photo"
+                    app:layout_constraintVertical_bias="0.1"
+                    tools:text="@string/user_name" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:onClick="@{()->viewmodel.onClickDelete()}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_cancel"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+                <TextView
+                    android:id="@+id/tv_speciality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{viewmodel.specialty}"
+                    android:textColor="@color/accentColor"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_photo"
+                    app:layout_constraintStart_toEndOf="@id/iv_photo"
+                    app:layout_constraintTop_toTopOf="@id/iv_photo"
+                    app:layout_constraintVertical_bias="0.7"
+                    tools:text="@string/specialty" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{()->viewmodel.onClickMark()}"
+                    android:src="@{viewmodel.marked ? @drawable/ic_mark_selected : @drawable/ic_mark_noselected }"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:src="@drawable/ic_mark_selected" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@android:color/transparent"
+                    android:onClick="@{()->viewmodel.onClickDelete()}"
+                    android:src="@drawable/ic_cancel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_emptyCard"
+                requestFocus="@{true}"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_add_circle_24"
+                android:visibility="@{viewmodel.showAddCard ? View.VISIBLE : View.GONE }"
+                tools:visibility="gone" />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:src="@mipmap/logo_cherry"
+            android:visibility="@{viewmodel.showLogo ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone" />
+
+    </FrameLayout>
+
 
 </layout>

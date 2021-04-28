@@ -1,15 +1,17 @@
 package com.cactus.cifracherry.presentation.home
 
-import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cactus.cifracherry.R
+import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.databinding.ActivityHomeBinding
 import com.cactus.cifracherry.presentation.home.listcard.CardsAdapter
 import com.cactus.cifracherry.data.model.Musician
 import com.cactus.cifracherry.data.repository.LocalDataSource
+import com.cactus.cifracherry.presentation.home.listAlbuns.AlbumAdapter
 import kotlinx.android.synthetic.main.activity_home.*
 
 
@@ -25,7 +27,8 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-        viewModel.callAdapterListCard = {setupRecyclerViewCards(it)}
+        viewModel.callSetupCardAdapter = {setupRecyclerViewCards(it)}
+        viewModel.callSetupAlbumAdapter = {setupRecyclerViewAlbum(it)}
         viewModel.setup()
 
         binding.viewmodel = viewModel
@@ -40,6 +43,14 @@ class HomeActivity : AppCompatActivity() {
             list,
             {user -> viewModel.onClickMark(user)},
             {user -> viewModel.onClickDelete(user)}
+        )
+    }
+
+    private fun setupRecyclerViewAlbum(list: List<Album>) {
+        rv_albums.layoutManager = GridLayoutManager(this, 3)
+        rv_albums.adapter = AlbumAdapter(
+            list,
+            {album -> viewModel.onClickAlbum(album)}
         )
     }
 

@@ -1,7 +1,8 @@
 package com.cactus.cifracherry.data.repository
 
-import com.cactus.cifracherry.data.MusiciansResult
+import com.cactus.cifracherry.data.OperationResult
 
 interface HomeRepository {
-    fun getMusicians(musiciansResultCallback: (result: MusiciansResult)-> Unit)
+    fun getMusicians(operationResultCallback : (result: OperationResult)-> Unit)
+    fun getAlbums(operationResultCallback: (result: OperationResult)-> Unit)
 }
