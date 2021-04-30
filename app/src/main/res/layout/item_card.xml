@@ -12,116 +12,127 @@
             name="viewmodel"
             type="com.cactus.cifracherry.presentation.home.listcard.CardViewModel" />
 
+
     </data>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="150dp">
 
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="240dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
-            android:visibility="@{viewmodel.showLogo ? View.GONE :  View.VISIBLE}"
-            tools:visibility="visible"
-            app:cardBackgroundColor="@color/colorSec"
-            app:cardCornerRadius="18dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{viewmodel.showMusicianCard ? View.VISIBLE : View.GONE }">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_photo"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/ic_profile_thin"
-                    app:civ_border_color="@color/white"
-                    app:civ_circle_background_color="@color/accentColor"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@{viewmodel.name}"
-                    android:textColor="@color/accentColor"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_photo"
-                    app:layout_constraintStart_toEndOf="@id/iv_photo"
-                    app:layout_constraintTop_toTopOf="@id/iv_photo"
-                    app:layout_constraintVertical_bias="0.1"
-                    tools:text="@string/user_name" />
-
-                <TextView
-                    android:id="@+id/tv_speciality"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@{viewmodel.specialty}"
-                    android:textColor="@color/accentColor"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_photo"
-                    app:layout_constraintStart_toEndOf="@id/iv_photo"
-                    app:layout_constraintTop_toTopOf="@id/iv_photo"
-                    app:layout_constraintVertical_bias="0.7"
-                    tools:text="@string/specialty" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingTop="@{viewmodel.isMarked ? 14 : 60}">
 
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    android:onClick="@{()->viewmodel.onClickMark()}"
-                    android:src="@{viewmodel.marked ? @drawable/ic_mark_selected : @drawable/ic_mark_noselected }"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:src="@drawable/ic_mark_selected" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_musician"
+                android:layout_width="240dp"
+                android:layout_height="110dp"
+                android:onClick="@{()->viewmodel.onClickMark()}"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:visibility="@{viewmodel.showLogo ? View.GONE :  View.VISIBLE}"
+                app:cardBackgroundColor="@color/colorSec"
+                app:cardCornerRadius="18dp"
+                tools:visibility="visible">
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@android:color/transparent"
-                    android:onClick="@{()->viewmodel.onClickDelete()}"
-                    android:src="@drawable/ic_cancel"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{viewmodel.showMusicianCard ? View.VISIBLE : View.GONE }">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_photo"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="8dp"
+                        setImageUrl="@{viewmodel.urlphoto}"
+                        android:src="@drawable/ic_profile_thin"
+                        app:civ_border_color="@color/white"
+                        app:civ_circle_background_color="@color/accentColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.name}"
+                        android:textColor="@color/accentColor"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_photo"
+                        app:layout_constraintStart_toEndOf="@id/iv_photo"
+                        app:layout_constraintTop_toTopOf="@id/iv_photo"
+                        app:layout_constraintVertical_bias="0.1"
+                        tools:text="@string/user_name" />
+
+                    <TextView
+                        android:id="@+id/tv_speciality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewmodel.specialty}"
+                        android:textColor="@color/accentColor"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_photo"
+                        app:layout_constraintStart_toEndOf="@id/iv_photo"
+                        app:layout_constraintTop_toTopOf="@id/iv_photo"
+                        app:layout_constraintVertical_bias="0.7"
+                        tools:text="@string/specialty" />
 
 
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{()->viewmodel.onClickMark()}"
+                        android:src="@{viewmodel.marked ? @drawable/ic_mark_selected : @drawable/ic_mark_noselected }"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:src="@drawable/ic_mark_selected" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_emptyCard"
-                requestFocus="@{true}"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_add_circle_24"
-                android:visibility="@{viewmodel.showAddCard ? View.VISIBLE : View.GONE }"
-                tools:visibility="gone" />
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{()->viewmodel.onClickDelete()}"
+                        android:src="@drawable/ic_cancel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </androidx.cardview.widget.CardView>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_emptyCard"
+                    requestFocus="@{true}"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_add_circle_24"
+                    android:visibility="@{viewmodel.showAddCard ? View.VISIBLE : View.GONE }"
+                    tools:visibility="invisible" />
+
+
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="14dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="14dp"
             android:src="@mipmap/logo_cherry"
             android:visibility="@{viewmodel.showLogo ? View.VISIBLE : View.GONE}"

@@ -1,24 +1,26 @@
 package com.cactus.cifracherry.presentation.home.listcard
 
-import com.cactus.cifracherry.common.FunClickMusician
+import androidx.databinding.ObservableBoolean
+import com.cactus.cifracherry.common.Enums
+import com.cactus.cifracherry.common.FunClickCard
 import com.cactus.cifracherry.data.model.Musician
+import com.cactus.cifracherry.databinding.ItemCardBinding
 
 class CardViewModel {
 
     //dependencies
     var user: Musician? = null
-    var marked = true
-    var onClickButtonMark: FunClickMusician? = null
-    var onClickButtonDelete: FunClickMusician? = null
+    var isMarked : ObservableBoolean = ObservableBoolean(false)
+    var binding : ItemCardBinding? = null
+    var onClickButtonMark: FunClickCard? = null
+    var onClickButtonDelete: FunClickCard? = null
 
     fun onClickMark() {
-        onClickButtonMark?.invoke(user)
-        showMark()
-
+        onClickButtonMark?.invoke(this)
     }
 
     fun onClickDelete() {
-        onClickButtonDelete?.invoke(user)
+        onClickButtonDelete?.invoke(this)
     }
 
     fun getName() = user?.name ?: ""
@@ -26,43 +28,31 @@ class CardViewModel {
     fun getSpecialty() = user?.specialty ?: ""
 
 
-    fun getUrlphoto() = user?.url ?: ""
+    fun getUrlphoto() = user?.urlPhoto ?: ""
 
-    fun showLogo() : Boolean? {
-        if (user?.displayControlCard != null) {
-          return user?.displayControlCard?.showLogo
+    fun showLogo() : Boolean {
+        if (user?.displayControlCard?.showTypeCard == Enums.LOGO) {
+          return true
         }
         return false
     }
 
-    fun showMusicianCard() : Boolean? {
-        if (user?.displayControlCard != null) {
-            return user?.displayControlCard?.showMusicianCard
+    fun showMusicianCard() : Boolean {
+        if (user?.displayControlCard?.showTypeCard == Enums.MUSICIANCARD) {
+            return true
         }
         return true
     }
 
-    fun showAddCard() : Boolean? {
-        if (user?.displayControlCard != null) {
-            return user?.displayControlCard?.showAddCard
+    fun showAddCard() : Boolean {
+        if (user?.displayControlCard?.showTypeCard == Enums.ADDCARD) {
+            return true
         }
         return false
     }
 
 
-    fun showMark() {
-       marked = !marked
-    }
 
-//        @BindingAdapter(value = ["setImageUrl"])
-//        fun CircleImageView.bindImageUrl(url: String?) {
-//            if (url != null && url.isNotBlank()) {
-//
-//                Picasso.get()
-//                    .load(url)
-//                    .into(this)
-//            }
-//        }
 
 
 }

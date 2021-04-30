@@ -1,5 +1,8 @@
 package com.cactus.cifracherry.presentation.home
 
+import android.content.ContentResolver
+import android.content.Context
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -12,6 +15,7 @@ import com.cactus.cifracherry.presentation.home.listcard.CardsAdapter
 import com.cactus.cifracherry.data.model.Musician
 import com.cactus.cifracherry.data.repository.LocalDataSource
 import com.cactus.cifracherry.presentation.home.listAlbuns.AlbumAdapter
+import com.cactus.cifracherry.presentation.home.listcard.CardViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 
 
@@ -29,21 +33,24 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.callSetupCardAdapter = {setupRecyclerViewCards(it)}
         viewModel.callSetupAlbumAdapter = {setupRecyclerViewAlbum(it)}
+        viewModel.callUpdateRecyclerCard = {updateRecyclerCards(it)}
         viewModel.setup()
-
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-        binding.rvCards
     }
 
     private fun setupRecyclerViewCards(list: List<Musician>) {
         rv_cards.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_cards.adapter = CardsAdapter(
             list,
-            {user -> viewModel.onClickMark(user)},
-            {user -> viewModel.onClickDelete(user)}
+            {card: CardViewModel? -> viewModel.onClickMark(card)},
+            {card: CardViewModel? -> viewModel.onClickDelete(card)}
         )
+    }
+
+    private fun updateRecyclerCards(position: Int){
+        rv_cards.adapter?.notifyItemChanged(position)
     }
 
     private fun setupRecyclerViewAlbum(list: List<Album>) {
