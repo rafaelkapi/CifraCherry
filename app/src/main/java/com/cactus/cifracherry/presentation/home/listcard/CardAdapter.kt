@@ -36,11 +36,13 @@ class CardsViewHolder(private val binding: ItemCardBinding) : RecyclerView.ViewH
         onClickDelete: FunClickCard? ) {
 
         binding.viewmodel?.user = user
-        binding.viewmodel?.user!!.displayControlCard?.position = position
         binding.viewmodel?.onClickButtonMark = onClickMark
         binding.viewmodel?.onClickButtonDelete = onClickDelete
         binding.viewmodel?.binding = binding
+        if (position == 1) binding.viewmodel?.initMark()
         binding.executePendingBindings()
+
+
     }
 
 

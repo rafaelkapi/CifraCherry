@@ -1,16 +1,36 @@
 package com.cactus.cifracherry.presentation.home.listAlbuns
 
+import android.app.Activity
+import android.app.Application
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.cactus.cifracherry.common.BindableAdapter
 import com.cactus.cifracherry.common.FunClickAlbum
 import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.databinding.ItemAlbumBinding
+import com.cactus.cifracherry.presentation.home.HomeActivity
+import com.cactus.cifracherry.presentation.home.HomeViewModel
 
 class AlbumAdapter(
-    private val listAlbum: List<Album>,
     private val onClick: FunClickAlbum? = null
-) : RecyclerView.Adapter<AlbumViewHolder>() {
+) : RecyclerView.Adapter<AlbumViewHolder>(), BindableAdapter<Album> {
+
+    override fun setData(items: List<Album>) {
+        listAlbum = items
+        notifyDataSetChanged()
+    }
+
+    override fun changedPositions(positions: Set<Int>) {
+        positions.forEach(this::notifyItemChanged)
+    }
+
+    var listAlbum = emptyList<Album>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -26,6 +46,8 @@ class AlbumAdapter(
     }
 
     override fun getItemCount(): Int = listAlbum.size
+
+
 }
 
 class AlbumViewHolder(private val binding: ItemAlbumBinding) :
@@ -38,7 +60,7 @@ class AlbumViewHolder(private val binding: ItemAlbumBinding) :
 
         binding.viewmodel?.album = album
         binding.viewmodel?.onClickAlbum = onClick
-        binding.executePendingBindings()
+        binding.invalidateAll()
 
     }
 }

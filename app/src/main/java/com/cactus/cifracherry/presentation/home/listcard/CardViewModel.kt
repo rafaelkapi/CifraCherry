@@ -8,6 +8,8 @@ import com.cactus.cifracherry.databinding.ItemCardBinding
 
 class CardViewModel {
 
+
+
     //dependencies
     var user: Musician? = null
     var isMarked : ObservableBoolean = ObservableBoolean(false)
@@ -18,6 +20,11 @@ class CardViewModel {
     fun onClickMark() {
         onClickButtonMark?.invoke(this)
     }
+
+    fun initMark() {
+        onClickButtonMark?.invoke(this)
+    }
+
 
     fun onClickDelete() {
         onClickButtonDelete?.invoke(this)

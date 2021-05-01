@@ -15,5 +15,4 @@ data class Musician (
 
 data class DisplayControlCard (
     var showTypeCard: Enums? = null,
-    var position: Int? = null
     )

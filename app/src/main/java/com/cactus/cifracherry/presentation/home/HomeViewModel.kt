@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.cactus.cifracherry.data.OperationResult
@@ -18,36 +20,22 @@ import java.lang.IllegalArgumentException
 class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
 
     var callSetupCardAdapter: ((List<Musician>) -> Unit)? = null
-    var callSetupAlbumAdapter: ((List<Album>) -> Unit)? = null
+    var callSetupAlbumAdapter: (() -> Unit)? = null
     var callUpdateRecyclerCard: ((Int) -> Unit)? = null
 
-    //    val listMusiLiveData: MutableLiveData<List<Musician>> = MutableLiveData()
+    private val _listAlbum: MutableLiveData<List<Album>> = MutableLiveData()
+    val listAlbum: LiveData<List<Album>>
+        get() = _listAlbum
+
+    private val _nameMark: MutableLiveData<String> = MutableLiveData()
+    val nameMark: LiveData<String>
+        get() = _nameMark
+
     private var listMusician: List<Musician> = listOf()
-    private var listAlbums: List<Album> = listOf()
+
 
     private var oldCArd: CardViewModel? = null
 
-
-    companion object {
-
-        @BindingAdapter("requestFocus")
-        @JvmStatic
-        fun View.requestFocus(requestFocus: Boolean) {
-            this.isFocusableInTouchMode = requestFocus
-        }
-
-        @BindingAdapter(value = ["setImageUrl"])
-        @JvmStatic
-        fun ImageView.bindImageUrl(url: String?) {
-            if (url != null && url.isNotBlank()) {
-                Picasso.get()
-                    .load(url)
-                    .into(this)
-            }
-        }
-
-
-    }
 
     fun setup() {
         taskLoadCards()
@@ -57,11 +45,13 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
     private fun taskLoadCards() {
         getMusicians()
         callSetupCardAdapter?.invoke(listMusician)
+
     }
 
     private fun taskLoadAlbums() {
-        getAlbums()
-        callSetupAlbumAdapter?.invoke(listAlbums)
+        _listAlbum.value = listMusician[1].albums
+        _nameMark.value = listMusician[1].name
+        callSetupAlbumAdapter?.invoke()
     }
 
     fun getMusicians() {
@@ -76,17 +66,7 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
         }
     }
 
-    fun getAlbums() {
-        dataSource.getAlbums { result: OperationResult ->
-            when (result) {
-                is OperationResult.Success<*> -> {
-                    listAlbums = result.list as List<Album>
-                }
-                is OperationResult.Error -> {
-                }
-            }
-        }
-    }
+
 
     class ViewModelFactory(val dataSource: HomeRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -100,10 +80,14 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
     fun onClickMark(card: CardViewModel?) {
         Log.i("Teste button", "mark musician ${card?.user?.name}")
         markCard(card)
+        _listAlbum.value = card?.user?.albums ?: emptyList()
+        _nameMark.value = card?.user?.name ?: ""
     }
 
     fun onClickDelete(card: CardViewModel?) {}
     fun onClickAlbum(album: Album?) {}
+
+
 
     fun markCard(card: CardViewModel?) {
         if (oldCArd != card) {

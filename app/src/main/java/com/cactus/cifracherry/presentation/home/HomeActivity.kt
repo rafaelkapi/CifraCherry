@@ -27,13 +27,14 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
+        val binding =
+            DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
 
 
 
-        viewModel.callSetupCardAdapter = {setupRecyclerViewCards(it)}
-        viewModel.callSetupAlbumAdapter = {setupRecyclerViewAlbum(it)}
-        viewModel.callUpdateRecyclerCard = {updateRecyclerCards(it)}
+        viewModel.callSetupCardAdapter = { setupRecyclerViewCards(it) }
+        viewModel.callSetupAlbumAdapter = { setupRecyclerViewAlbum() }
+        viewModel.callUpdateRecyclerCard = { updateRecyclerCards(it) }
         viewModel.setup()
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
@@ -44,21 +45,18 @@ class HomeActivity : AppCompatActivity() {
         rv_cards.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_cards.adapter = CardsAdapter(
             list,
-            {card: CardViewModel? -> viewModel.onClickMark(card)},
-            {card: CardViewModel? -> viewModel.onClickDelete(card)}
+            { card: CardViewModel? -> viewModel.onClickMark(card) },
+            { card: CardViewModel? -> viewModel.onClickDelete(card) }
         )
     }
 
-    private fun updateRecyclerCards(position: Int){
+    private fun updateRecyclerCards(position: Int) {
         rv_cards.adapter?.notifyItemChanged(position)
     }
 
-    private fun setupRecyclerViewAlbum(list: List<Album>) {
+    private fun setupRecyclerViewAlbum() {
         rv_albums.layoutManager = GridLayoutManager(this, 3)
-        rv_albums.adapter = AlbumAdapter(
-            list,
-            {album -> viewModel.onClickAlbum(album)}
-        )
+        rv_albums.adapter = AlbumAdapter({ album -> viewModel.onClickAlbum(album) })
     }
 
 
