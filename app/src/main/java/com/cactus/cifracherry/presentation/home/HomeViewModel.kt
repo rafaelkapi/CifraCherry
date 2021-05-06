@@ -1,20 +1,15 @@
 package com.cactus.cifracherry.presentation.home
 
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.cactus.cifracherry.data.OperationResult
+import com.cactus.cifracherry.data.repository.OperationResult
 import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.data.model.Musician
 import com.cactus.cifracherry.data.repository.HomeRepository
 import com.cactus.cifracherry.presentation.home.listcard.CardViewModel
-import com.squareup.picasso.Picasso
 import java.lang.IllegalArgumentException
 
 class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
@@ -22,6 +17,7 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
     var callSetupCardAdapter: ((List<Musician>) -> Unit)? = null
     var callSetupAlbumAdapter: (() -> Unit)? = null
     var callUpdateRecyclerCard: ((Int) -> Unit)? = null
+    var callOpenAlbum: ((Album?) -> Unit)? = null
 
     private val _listAlbum: MutableLiveData<List<Album>> = MutableLiveData()
     val listAlbum: LiveData<List<Album>>
@@ -85,7 +81,10 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
     }
 
     fun onClickDelete(card: CardViewModel?) {}
-    fun onClickAlbum(album: Album?) {}
+
+    fun onClickAlbum(album: Album?) {
+        callOpenAlbum?.invoke(album)
+    }
 
 
 
@@ -96,6 +95,7 @@ class HomeViewModel(val dataSource: HomeRepository) : ViewModel() {
             oldCArd = card
         }
     }
+
 
 
 }

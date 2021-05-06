@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.cactus.cifracherry.presentation.album.AlbumViewModel" />
+
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        tools:context=".presentation.album.AlbumActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                requestFocus="@{true}"
+                android:scaleType="centerCrop"
+                setImageUrl="@{viewmodel.urlPhoto}"
+                tools:src="@drawable/capa_album_classicas"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{viewmodel.name}"
+                android:textSize="16sp"
+                android:textColor="@color/accentColor"
+                tools:text="Clássicas"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_musics"
+                data="@{viewmodel.listAlbum}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_music"
+                />
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

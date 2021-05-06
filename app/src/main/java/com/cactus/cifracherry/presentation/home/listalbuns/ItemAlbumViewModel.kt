@@ -1,17 +1,12 @@
-package com.cactus.cifracherry.presentation.home.listAlbuns
+package com.cactus.cifracherry.presentation.home.listalbuns
 
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import androidx.databinding.library.baseAdapters.BR
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.cactus.cifracherry.common.FunClickAlbum
+import com.cactus.cifracherry.common.LambdaClickAlbum
 import com.cactus.cifracherry.data.model.Album
 
-class AlbumViewModel {
+class ItemAlbumViewModel {
 
     var album: Album? = null
-    var onClickAlbum: FunClickAlbum? = null
+    var onClickAlbum: LambdaClickAlbum? = null
 
     fun onClickAlbum() {
         onClickAlbum?.invoke(album)

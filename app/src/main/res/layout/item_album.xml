@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.cactus.cifracherry.presentation.home.listAlbuns.AlbumViewModel" />
+            type="com.cactus.cifracherry.presentation.home.listalbuns.ItemAlbumViewModel" />
 
     </data>
 
@@ -21,6 +21,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:onClick="@{()->viewmodel.onClickAlbum()}"
             app:cardCornerRadius="8dp">
 
             <FrameLayout
