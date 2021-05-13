@@ -1,22 +1,39 @@
 package com.cactus.cifracherry.data.repository
 
+import android.app.Application
+import android.content.Context
 import android.net.Uri
+import com.cactus.cifracherry.R
 import com.cactus.cifracherry.common.Enums
+import com.cactus.cifracherry.common.MediaHelper
+import com.cactus.cifracherry.common.SupportMedia
 import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.data.model.DisplayControlCard
 import com.cactus.cifracherry.data.model.Music
 import com.cactus.cifracherry.data.model.Musician
+import com.cactus.cifracherry.presentation.album.view.AlbumActivity
+import com.cactus.cifracherry.presentation.album.view.AlbumFragment
 
 class LocalDataSource : HomeRepository {
 
+    val mediaHelper: SupportMedia = MediaHelper()
+    val uri = mediaHelper.builderUri(R.raw.saulofernandes)
+
     private val listMusic = listOf<Music>(
-        Music("Lagrimas do céu","Carminho","C", resourceUri("capa_album_classicas").toString()),
-        Music("Senhor do tempo","Charlie Brown","D#", resourceUri("capa_album_internacionais").toString()),
-        Music("Tapão na Raba","Saia Rodada","A", resourceUri("capa_album_calmas").toString()),
-        Music("Teto de Vidro","Pity","F#m", resourceUri("capa_album_rock").toString()),
-        Music("Muriçoca","Agreste","D", resourceUri("capa_album_aleatorias").toString()),
-        Music("Zuar e Beber","Trio Bravana","F#", resourceUri("capa_album_agitadas").toString()),
-        Music("Pedras da minha rua","Carminho","E", resourceUri("capa_album_classicas").toString()),
+        Music("Lagrimas do céu","Carminho","C",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_classicas").toString()),
+        Music("Senhor do tempo","Charlie Brown","D#",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_internacionais").toString()),
+        Music("Tapão na Raba","Saia Rodada","A",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_calmas").toString()),
+        Music("Teto de Vidro","Pity","F#m",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_rock").toString()),
+        Music("Muriçoca","Agreste","D",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_aleatorias").toString()),
+        Music("Zuar e Beber","Trio Bravana","F#",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_agitadas").toString()),
+        Music("Pedras da minha rua","Carminho","E",
+            mediaHelper.readTxt(uri), resourceUri("capa_album_classicas").toString()),
     )
 
     private val listListMusic = mutableListOf<List<Music>>(
@@ -74,3 +91,4 @@ class LocalDataSource : HomeRepository {
     fun resourceUri(drawable: String): Uri =
         Uri.parse("android.resource://com.cactus.cifracherry/drawable/${drawable}")
 }
+

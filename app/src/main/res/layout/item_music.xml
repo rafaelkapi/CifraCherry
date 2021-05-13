@@ -16,17 +16,18 @@
         android:layout_height="72dp"
         android:onClick="@{()->viewmodel.onClick()}"
         android:background="@android:color/transparent"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        tools:background="@color/colorPrim">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_musicphoto"
             android:layout_width="60dp"
             android:layout_height="60dp"
             setImageUrl="@{viewmodel.urlPhoto}"
+            android:src="@drawable/ic_baseline_image_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:src="@drawable/capa_album_aleatorias"
             />
 
         <TextView
@@ -58,17 +59,30 @@
             />
 
         <TextView
+            android:id="@+id/tone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewmodel.tone}"
             android:textSize="14sp"
             android:textColor="@color/accentColor"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/more"
             app:layout_constraintTop_toTopOf="@id/iv_musicphoto"
             app:layout_constraintBottom_toBottomOf="@id/iv_musicphoto"
             tools:text="Tom: C"
             />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/more"
+            android:layout_width="26dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="4dp"
+            android:onClick="@{()->viewmodel.onClickMore()}"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 

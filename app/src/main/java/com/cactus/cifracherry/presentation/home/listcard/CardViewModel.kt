@@ -34,7 +34,6 @@ class CardViewModel {
 
     fun getSpecialty() = user?.specialty ?: ""
 
-
     fun getUrlphoto() = user?.urlPhoto ?: ""
 
     fun showLogo() : Boolean {

@@ -1,15 +1,17 @@
-package com.cactus.cifracherry.presentation.album
+package com.cactus.cifracherry.presentation.album.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cactus.cifracherry.R
 import com.cactus.cifracherry.databinding.FragmentAlbumBinding
+import com.cactus.cifracherry.presentation.album.AlbumViewModel
 import com.cactus.cifracherry.presentation.album.listmusic.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_album.*
 
@@ -24,10 +26,9 @@ class AlbumFragment : Fragment() {
         fun newInstance(): AlbumFragment = AlbumFragment()
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_album, container, false)
         return binding.root
@@ -38,28 +39,25 @@ class AlbumFragment : Fragment() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
-        rv_musics.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = MusicAdapter()
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).supportActionBar.let {
+            it?.setDisplayHomeAsUpEnabled(true)
+            it?.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24)
+            it?.setTitle(null)
         }
 
-    }
+        rv_musics.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = MusicAdapter({ music -> viewModel.onClickMusic(music) })
+        }
 
+        toString()
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-//    companion object {
-//
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            AlbumFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
 }

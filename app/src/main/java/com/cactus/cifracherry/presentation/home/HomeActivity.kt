@@ -1,6 +1,7 @@
 package com.cactus.cifracherry.presentation.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,7 +12,7 @@ import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.data.model.Musician
 import com.cactus.cifracherry.data.repository.LocalDataSource
 import com.cactus.cifracherry.databinding.ActivityHomeBinding
-import com.cactus.cifracherry.presentation.album.AlbumActivity
+import com.cactus.cifracherry.presentation.album.view.AlbumActivity
 import com.cactus.cifracherry.presentation.home.listalbuns.AlbumAdapter
 import com.cactus.cifracherry.presentation.home.listcard.CardViewModel
 import com.cactus.cifracherry.presentation.home.listcard.CardsAdapter
@@ -29,8 +30,6 @@ class HomeActivity : AppCompatActivity() {
         val binding =
             DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
 
-
-
         viewModel.callSetupCardAdapter = { setupRecyclerViewCards(it) }
         viewModel.callSetupAlbumAdapter = { setupRecyclerViewAlbum() }
         viewModel.callUpdateRecyclerCard = { updateRecyclerCards(it) }
@@ -38,7 +37,6 @@ class HomeActivity : AppCompatActivity() {
         viewModel.setup()
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
-
     }
 
     private fun setupRecyclerViewCards(list: List<Musician>) {

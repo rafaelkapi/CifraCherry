@@ -16,16 +16,31 @@ class ItemMusicViewModel {
 
 
     var onClickMusic: LambdaClickMusic? = null
+    var onClickMore: LambdaClickMusic? = null
 
     fun onClick() {
         onClickMusic?.invoke(music)
     }
 
+    fun onClickMore() {
+        onClickMore?.invoke(music)
+    }
+
     fun setItem(music: Music?) {
         this.music = music
-        name.set(music?.name)
-        author.set(music?.author)
-        tone.set(music?.tone)
+
+        if (music?.name != null) {
+            name.set(music?.name)
+        } else name.set("")
+
+        if (music?.author != null) {
+            author.set("Por ${music?.author}")
+        } else author.set("")
+
+        if (music?.tone != null) {
+            tone.set("Tom: ${music?.tone}")
+        } else tone.set("")
+
         urlPhoto.set(music?.urlPhoto)
     }
 

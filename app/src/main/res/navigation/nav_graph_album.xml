@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/albumFragment"
-        android:name="com.cactus.cifracherry.presentation.album.AlbumFragment"
+        android:name="com.cactus.cifracherry.presentation.album.view.AlbumFragment"
         android:label="AlbumFragment">
         <action
             android:id="@+id/action_albumFragment_to_cifraFragment"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/cifraFragment"
-        android:name="com.cactus.cifracherry.presentation.album.CifraFragment"
+        android:name="com.cactus.cifracherry.presentation.album.view.CifraFragment"
         android:label="fragment_cifra"
         tools:layout="@layout/fragment_cifra" />
 

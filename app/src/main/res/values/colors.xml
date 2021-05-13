@@ -11,6 +11,7 @@
     <color name="bnv_default">#FFFFFFFF</color>
     <color name="colorPrim">#202030</color>
     <color name="colorSec">#3D4361</color>
-    <color name="accentColor">#80849C</color>
+    <color name="accentColor">#B0B3C3</color>
+    <color name="accentCherry">#A52C4F</color>
 
 </resources>
