@@ -4,18 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cactus.cifracherry.common.BindableAdapter
-import com.cactus.cifracherry.common.LambdaClickAlbum
+import com.cactus.cifracherry.common.CallClickAlbum
 import com.cactus.cifracherry.data.model.Album
 import com.cactus.cifracherry.databinding.ItemAlbumBinding
 
 class AlbumAdapter(
-    private val onClick: LambdaClickAlbum? = null
+    private val onClick: CallClickAlbum? = null
 ) : RecyclerView.Adapter<AlbumViewHolder>(), BindableAdapter<Album> {
 
     override fun setData(items: List<Album>) {
         listAlbum = items
         notifyDataSetChanged()
     }
+
+    override fun deleteItem(position: Int?) {
+    }
+
 
     override fun changedPositions(positions: Set<Int>) {
         positions.forEach(this::notifyItemChanged)
@@ -46,7 +50,7 @@ class AlbumViewHolder(private val binding: ItemAlbumBinding) :
 
     fun bind(
         album: Album,
-        onClick: LambdaClickAlbum?
+        onClick: CallClickAlbum?
     ) {
 
         binding.viewmodel?.album = album

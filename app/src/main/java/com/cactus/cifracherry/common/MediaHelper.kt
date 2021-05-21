@@ -4,13 +4,14 @@ import android.content.ContentResolver
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import androidx.annotation.DrawableRes
 import com.cactus.cifracherry.R
 import java.io.File
 import java.io.FileOutputStream
 
 class MediaHelper : SupportMedia {
 
-    override fun builderUri(resourceId: Int): Uri {
+    override fun builderUri(@DrawableRes resourceId: Int): Uri {
 
         val context = MyApp.instance
         return Uri.Builder()

@@ -3,13 +3,13 @@ package com.cactus.cifracherry.presentation.home.listcard
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.cactus.cifracherry.common.FunClickCard
+import com.cactus.cifracherry.common.CallClickCard
 import com.cactus.cifracherry.databinding.ItemCardBinding
 import com.cactus.cifracherry.data.model.Musician
 
 class CardsAdapter (private val listCards: List<Musician>,
-                    private val onClickMark: FunClickCard? = null,
-                    private val onClickDelete: FunClickCard? = null
+                    private val onClickMark: CallClickCard? = null,
+                    private val onClickDelete: CallClickCard? = null
 ) : RecyclerView.Adapter<CardsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsViewHolder {
@@ -32,8 +32,8 @@ class CardsViewHolder(private val binding: ItemCardBinding) : RecyclerView.ViewH
     fun bind(
         user: Musician,
         position: Int,
-        onClickMark: FunClickCard?,
-        onClickDelete: FunClickCard? ) {
+        onClickMark: CallClickCard?,
+        onClickDelete: CallClickCard? ) {
 
         binding.viewmodel?.user = user
         binding.viewmodel?.onClickButtonMark = onClickMark

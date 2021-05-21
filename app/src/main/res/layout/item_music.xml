@@ -11,82 +11,149 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/item_music_container"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:onClick="@{()->viewmodel.onClick()}"
-        android:background="@android:color/transparent"
         android:layout_margin="4dp"
+        android:background="@android:color/transparent"
+        android:onClick="@{()->viewmodel.onClick()}"
+        app:layoutDescription="@xml/item_music_scene"
+        app:showPaths="false"
         tools:background="@color/colorPrim">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_musicphoto"
+            setImageUrl="@{viewmodel.urlPhoto}"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            setImageUrl="@{viewmodel.urlPhoto}"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/ic_baseline_image_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_music_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text= "@{viewmodel.name}"
+            android:layout_marginStart="8dp"
+            android:text="@{viewmodel.name}"
+            android:textColor="@color/accentColor"
             android:textSize="16sp"
-            android:textColor="@color/accentColor"
+            app:layout_constraintBottom_toBottomOf="@id/iv_musicphoto"
+            app:layout_constraintEnd_toStartOf="@+id/button_more"
+            app:layout_constraintHorizontal_bias=".0"
+            app:layout_constraintStart_toEndOf="@id/iv_musicphoto"
+            app:layout_constraintTop_toTopOf="@id/iv_musicphoto"
             app:layout_constraintVertical_bias="0.3"
-            android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@id/iv_musicphoto"
-            app:layout_constraintTop_toTopOf="@id/iv_musicphoto"
-            app:layout_constraintBottom_toBottomOf="@id/iv_musicphoto"
-            tools:text="Um lugarzinho na sua cama"
-            />
+            tools:text="Um lugarzinho na sua cama" />
 
         <TextView
+            android:id="@+id/tv_music_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text= "@{viewmodel.author}"
+            android:layout_marginStart="8dp"
+            android:text="@{viewmodel.author}"
+            android:textColor="@color/accentColor"
             android:textSize="12sp"
-            android:textColor="@color/accentColor"
-            app:layout_constraintVertical_bias="0.7"
-            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_musicphoto"
+            app:layout_constraintEnd_toStartOf="@+id/button_more"
+            app:layout_constraintHorizontal_bias=".0"
             app:layout_constraintStart_toEndOf="@id/iv_musicphoto"
             app:layout_constraintTop_toTopOf="@id/iv_musicphoto"
-            app:layout_constraintBottom_toBottomOf="@id/iv_musicphoto"
-            tools:text="by: Zé Vaqueiro"
-            />
+            app:layout_constraintVertical_bias="0.7"
+            tools:text="by: Zé Vaqueiro" />
 
         <TextView
-            android:id="@+id/tone"
+            android:id="@+id/tv_music_tone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.tone}"
-            android:textSize="14sp"
-            android:textColor="@color/accentColor"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toStartOf="@id/more"
-            app:layout_constraintTop_toTopOf="@id/iv_musicphoto"
+            android:text="@{viewmodel.tone}"
+            android:textColor="@color/accentColor"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_musicphoto"
-            tools:text="Tom: C"
-            />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/more"
-            android:layout_width="26dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="4dp"
-            android:onClick="@{()->viewmodel.onClickMore()}"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_more"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/button_more"
+            app:layout_constraintTop_toTopOf="@id/iv_musicphoto"
+            tools:text="Tom: C" />
 
 
+        <View
+            android:id="@+id/v_background"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrim"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button_more"
+            app:layout_constraintStart_toStartOf="@+id/button_more"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!---    * * * * *   Menu Animated   * * * * *    -->
+
+
+        <LinearLayout
+            android:id="@+id/container_music_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="@color/colorPrim"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button_more"
+            app:layout_constraintStart_toStartOf="@+id/button_more"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="18dp"
+                android:onClick="@{()-> viewmodel.menuOptions(true)}"
+                android:background="@android:color/transparent"
+                android:text="@string/edit"
+                android:textAllCaps="false"
+                android:textColor="@color/accentColor"
+                android:textSize="14sp" />
+
+
+            <View
+                android:id="@+id/v_divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="#30AFB3C3" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="18dp"
+                android:onClick="@{()-> viewmodel.menuOptions(false)}"
+                android:background="@android:color/transparent"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                android:textColor="@color/accentColor"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <include layout="@layout/button_more_animated" />
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 
 </layout>

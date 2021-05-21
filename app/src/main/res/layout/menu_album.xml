@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    android:id="@+id/container_base"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+<!--    <include tools:layout="@layout/fragment_album"/>-->
+
+    <View
+        android:id="@+id/v_mask"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#80000000"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_menu_album"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrim"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_profile_thin"
+            app:civ_border_color="@color/white"
+            app:civ_circle_background_color="@color/accentColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Nome da musica"
+            android:textColor="@color/accentColor"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@id/ti_name"
+            app:layout_constraintBottom_toTopOf="@id/ti_name"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_name"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="#3D4361"
+            android:gravity="center|start"
+            app:errorTextAppearance="@android:color/holo_red_light"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/et_tone"
+            app:layout_constraintStart_toStartOf="@id/et_author"
+            app:layout_constraintTop_toBottomOf="@id/iv_photo">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@null"
+                android:hint="Como tudo deve ser"
+                android:shadowColor="@color/white"
+                android:textColor="#80849C"
+                android:textColorHint="#80849C"
+                android:textSize="17sp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/author"
+            android:textColor="@color/accentColor"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@id/et_author"
+            app:layout_constraintStart_toStartOf="@id/et_author" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_author"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="20dp"
+            android:background="#3D4361"
+            android:hint="Charlie Brown Jr"
+            android:paddingStart="8dp"
+            android:shadowColor="@color/white"
+            android:textColor="#80849C"
+            android:textColorHint="#80849C"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@id/et_tone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ti_name" />
+
+
+        <TextView
+            android:id="@+id/tv_tone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Tom"
+            android:textColor="@color/accentColor"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@id/et_tone"
+            app:layout_constraintStart_toStartOf="@id/et_tone" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_tone"
+            android:layout_width="72dp"
+            android:layout_height="50dp"
+            android:background="#3D4361"
+            android:hint="C#m"
+            android:shadowColor="@color/white"
+            android:textAlignment="center"
+            android:textColor="#80849C"
+            android:textColorHint="#80849C"
+            app:layout_constraintEnd_toStartOf="@id/et_capo"
+            app:layout_constraintStart_toEndOf="@id/et_author"
+            app:layout_constraintTop_toTopOf="@id/et_author" />
+
+        <TextView
+            android:id="@+id/tv_capo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Capo"
+            android:textColor="@color/accentColor"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@id/et_capo"
+            app:layout_constraintEnd_toEndOf="@id/et_capo" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_capo"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:background="#3D4361"
+            android:hint="2"
+            android:shadowColor="@color/white"
+            android:textAlignment="center"
+            android:textColor="#80849C"
+            android:textColorHint="#80849C"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/et_tone"
+            app:layout_constraintTop_toTopOf="@id/et_tone" />
+
+
+        <TextView
+            android:id="@+id/tv_cifra"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="marquee"
+            android:gravity="center|start"
+            android:paddingStart="8dp"
+            android:text="File: /como tudo deve ser.txt"
+            android:textColor="@color/accentColor"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="@id/et_author"
+            app:layout_constraintStart_toStartOf="@id/et_author"
+            app:layout_constraintTop_toBottomOf="@id/et_author"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_baseline_add_24"
+            android:text="Add Cifra"
+            android:textAllCaps="false"
+            android:textColor="@color/accentCherry"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_cifra"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_cifra" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/my_button"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Pode Alterar !"
+            android:textAllCaps="false"
+            android:textColor="#8186A1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cifra"
+
+            />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_ok" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</merge>
+

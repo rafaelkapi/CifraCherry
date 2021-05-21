@@ -2,7 +2,7 @@ package com.cactus.cifracherry.presentation.home.listcard
 
 import androidx.databinding.ObservableBoolean
 import com.cactus.cifracherry.common.Enums
-import com.cactus.cifracherry.common.FunClickCard
+import com.cactus.cifracherry.common.CallClickCard
 import com.cactus.cifracherry.data.model.Musician
 import com.cactus.cifracherry.databinding.ItemCardBinding
 
@@ -14,8 +14,8 @@ class CardViewModel {
     var user: Musician? = null
     var isMarked : ObservableBoolean = ObservableBoolean(false)
     var binding : ItemCardBinding? = null
-    var onClickButtonMark: FunClickCard? = null
-    var onClickButtonDelete: FunClickCard? = null
+    var onClickButtonMark: CallClickCard? = null
+    var onClickButtonDelete: CallClickCard? = null
 
     fun onClickMark() {
         onClickButtonMark?.invoke(this)

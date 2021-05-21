@@ -20,4 +20,9 @@
     <string name="specialty">instrumento</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete">Excluir</string>
+    <string name="edit">Editar</string>
+    <string name="name_music">Nome da música</string>
+    <string name="author">Autor</string>
+    <string name="add_cipher">Add Cifra</string>
 </resources>
