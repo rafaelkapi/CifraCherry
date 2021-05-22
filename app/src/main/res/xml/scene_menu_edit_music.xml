@@ -8,8 +8,8 @@
 
         <OnSwipe
             app:dragDirection="dragDown"
-            app:touchAnchorId="@id/container_menu_album"
-            app:touchRegionId="@id/container_menu_album" />
+            app:touchAnchorId="@id/container_menu_music"
+            app:touchRegionId="@id/container_menu_music" />
 
     </Transition>
 
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/container_menu_album"
+            android:id="@+id/container_menu_music"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/container_menu_album"
+            android:id="@+id/container_menu_music"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

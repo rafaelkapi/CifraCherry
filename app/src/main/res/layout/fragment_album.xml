@@ -51,6 +51,7 @@
                         android:layout_gravity="top|end"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="4dp"
+                        android:onClick="@{() -> viewmodel.menuEditAlbum()}"
                         android:background="@android:color/transparent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_more" />
@@ -116,14 +117,24 @@
         </ScrollView>
 
         <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/motion_album_menu"
+            android:id="@+id/motion_menu_edit_music"
             android:visibility="gone"
-            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutDescription="@xml/fragment_album_scene">
+            app:layoutDescription="@xml/scene_menu_edit_music">
 
-            <include layout="@layout/menu_album" />
+            <include layout="@layout/menu_edit_music" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motion_menu_edit_album"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutDescription="@xml/scene_menu_edit_album">
+
+            <include layout="@layout/menu_edit_album" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 

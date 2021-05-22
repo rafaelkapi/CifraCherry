@@ -1,11 +1,7 @@
 package com.cactus.cifracherry.presentation.album
 
 import android.net.Uri
-import android.util.Log
-import androidx.databinding.Observable
-import androidx.databinding.ObservableList
 import androidx.lifecycle.*
-import com.cactus.cifracherry.R
 import com.cactus.cifracherry.common.MediaHelper
 import com.cactus.cifracherry.common.SupportMedia
 import com.cactus.cifracherry.data.model.Album
@@ -41,7 +37,8 @@ class AlbumViewModel : ViewModel() {
     var callStartAlbumFragment: (() -> Unit)? = null
     var callStartCifraFragment: (() -> Unit)? = null
     var callFilePickerIntent: (() -> Unit)? = null
-    var callShowMenuEdit: (() -> Unit)? = null
+    var callShowMenuEditMusic: (() -> Unit)? = null
+    var callShowMenuEditAlbum: (() -> Unit)? = null
 
 
     fun setup() {
@@ -66,16 +63,19 @@ class AlbumViewModel : ViewModel() {
         callStartCifraFragment?.invoke()
     }
 
+    fun menuEditAlbum() {
+        callShowMenuEditAlbum?.invoke()
+    }
+
     fun menuOptionsMusic(edit: Boolean, itemMusic: ItemMusicViewModel) {
         val mediaHelper: SupportMedia = MediaHelper()
         if (edit) {
-            callShowMenuEdit?.invoke()
+            callShowMenuEditMusic?.invoke()
 //            itemMusic.apply {
 //                name.set("Mudei aqui")
 //                author.set("funfa caraaaai xãmaaa")
 //                urlPhoto.set(mediaHelper.builderUri(R.drawable.capa_album_aleatorias).toString())
 //            }
-            // * * * *   Delete Music   * * * *
         } else deleteMusic(itemMusic)
     }
 

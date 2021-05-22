@@ -12,7 +12,8 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.cactus.cifracherry.R
-import kotlinx.android.synthetic.main.menu_album.view.*
+import kotlinx.android.synthetic.main.menu_edit_music.view.*
+//import kotlinx.android.synthetic.main.menu_album.view.*
 import kotlin.math.abs
 
 class TouchMotionLayout(context: Context, attributeSet: AttributeSet) :

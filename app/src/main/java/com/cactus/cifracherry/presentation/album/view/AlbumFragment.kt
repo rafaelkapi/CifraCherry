@@ -15,7 +15,8 @@ import com.cactus.cifracherry.databinding.FragmentAlbumBinding
 import com.cactus.cifracherry.presentation.album.AlbumViewModel
 import com.cactus.cifracherry.presentation.album.listmusic.MusicAdapter
 import kotlinx.android.synthetic.main.fragment_album.*
-import kotlinx.android.synthetic.main.menu_album.*
+import kotlinx.android.synthetic.main.menu_edit_album.*
+import kotlinx.android.synthetic.main.menu_edit_music.*
 
 
 class AlbumFragment : Fragment() {
@@ -44,7 +45,8 @@ class AlbumFragment : Fragment() {
         setBackArrow()
         setupRecyclerViewMusics()
         viewModel.apply {
-            callShowMenuEdit = {showMenuEdit()}
+            callShowMenuEditMusic = {showMenuEditMusic()}
+            callShowMenuEditAlbum = {showMenuEditAlbum()}
         }
     }
 
@@ -68,8 +70,8 @@ class AlbumFragment : Fragment() {
     }
 
 
-    fun showMenuEdit() {
-        motion_album_menu.apply {
+    fun showMenuEditMusic() {
+        motion_menu_edit_music.apply {
             visibility = View.VISIBLE
             transitionToEnd()
             setTransitionDuration(300)
@@ -106,7 +108,51 @@ class AlbumFragment : Fragment() {
         }
 
         v_mask.setOnClickListener {
-            motion_album_menu.apply {
+            motion_menu_edit_music.apply {
+                transitionToStart()
+            }
+        }
+    }
+
+    fun showMenuEditAlbum() {
+        motion_menu_edit_album.apply {
+            visibility = View.VISIBLE
+            transitionToEnd()
+            setTransitionDuration(300)
+            setTransitionListener(object : MotionLayout.TransitionListener {
+
+                override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                    if (currentId == R.id.state_start_edit)
+                        motionLayout?.visibility = View.GONE
+                }
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                    progress: Float,
+                ) {
+                }
+
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                ) {
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout?,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float,
+                ) {
+                }
+            })
+        }
+
+        v_mask_album.setOnClickListener {
+            motion_menu_edit_album.apply {
                 transitionToStart()
             }
         }
